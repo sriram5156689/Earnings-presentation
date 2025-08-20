@@ -1,40 +1,242 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Quarterly Earnings — Interactive Reveal.js Report</title>
 
-		<title>reveal.js</title>
+  <!-- Reveal.js from UNPKG CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4/dist/reveal.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4/dist/theme/black.css" id="theme">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+  <!-- Highlight.js theme (Monokai) -->
+  <link rel="stylesheet" href="https://unpkg.com/highlight.js@11.8.0/styles/monokai-sublime.css">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+  <!-- KaTeX for math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+  <style>
+    /* Small custom styling */
+    .company-logo { width: 180px; margin-bottom: 12px; }
+    .contact { font-size: 0.9rem; opacity: 0.9; }
+    .small-note { font-size: 0.85rem; color: #ddd; }
+    .svg-chart { max-width: 640px; width: 100%; height: auto; }
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+    /* Background effects */
+    .gradient-bg {
+      background: linear-gradient(-45deg, #1d2671, #c33764, #0f9b0f, #11998e);
+      background-size: 600% 600%;
+      animation: gradientShift 15s ease infinite;
+    }
+    @keyframes gradientShift {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    .stripe-bg {
+      background: repeating-linear-gradient(
+        -45deg,
+        #222,
+        #222 20px,
+        #333 20px,
+        #333 40px
+      );
+      animation: stripeMove 10s linear infinite;
+    }
+    @keyframes stripeMove {
+      from { background-position: 0 0; }
+      to { background-position: 400px 400px; }
+    }
+
+    .wave-bg {
+      background: linear-gradient(to right, #141e30, #243b55);
+      position: relative;
+      overflow: hidden;
+    }
+    .wave-bg::after {
+      content: "";
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: url("https://www.transparenttextures.com/patterns/wave-cut.png");
+      opacity: 0.2;
+      animation: waveScroll 20s linear infinite;
+    }
+    @keyframes waveScroll {
+      from { background-position: 0 0; }
+      to { background-position: 1000px 0; }
+    }
+
+    .dots-bg {
+      background: radial-gradient(circle, #111 20%, #000 100%);
+    }
+    .dots-bg::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: url("https://www.transparenttextures.com/patterns/dot-grid.png");
+      opacity: 0.3;
+      animation: dotsMove 25s linear infinite;
+    }
+    @keyframes dotsMove {
+      from { background-position: 0 0; }
+      to { background-position: 800px 400px; }
+    }
+
+    /* Stars background (already in your code) */
+    .star-bg {
+      background: black url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+      animation: moveStars 60s linear infinite;
+    }
+    @keyframes moveStars {
+      from { background-position: 0 0; }
+      to { background-position: -10000px 5000px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Title slide -->
+      <section class="gradient-bg">
+        <h1>Q2 2025 Quarterly Earnings</h1>
+        <p class="small-note">Interactive presentation demonstrating modern features — for stakeholders</p>
+        <svg class="company-logo" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg"><rect rx="6" width="120" height="40" fill="#0b3954"></rect><text x="14" y="26" fill="#fff" font-family="Helvetica, Arial, sans-serif" font-size="14">FinCore Capital</text></svg>
+        <p class="contact">Prepared by: Technical Consulting — <a href="mailto:23f2002842@ds.study.iitm.ac.in">23f2002842@ds.study.iitm.ac.in</a></p>
+        <aside class="notes">Introduce yourself...</aside>
+      </section>
+
+      <!-- Markdown slide -->
+      <section data-markdown class="stripe-bg">
+        <textarea data-template>
+## Executive Summary (Markdown)
+- Revenue: **$1.2B** (YoY +6%).
+- Net Income: **$210M** (YoY +9%).
+- Key drivers:
+  - Fragmented digital sales growth.
+  - Operational efficiencies and cost control.
+---
+## Highlights
+1. Product A grew by **15%**.
+2. Reduced operating expenses by **3%**.
+3. Investments in cloud migration and risk controls.
+        </textarea>
+        <aside class="notes">Use this markdown slide...</aside>
+      </section>
+
+      <!-- KPIs -->
+      <section class="wave-bg">
+        <h2>Key KPIs</h2>
+        <ul>
+          <li class="fragment">Revenue: <strong>$1.2B</strong></li>
+          <li class="fragment">EBITDA Margin: <strong>18%</strong></li>
+          <li class="fragment">Net Income: <strong>$210M</strong></li>
+          <li class="fragment">Active Customers: <strong>4.5M</strong></li>
+        </ul>
+        <!-- chart -->
+        <svg class="svg-chart" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+          <style>.bar{fill:#0b6e4f}.axis{stroke:#999;stroke-width:1}.label{font-family:Arial;font-size:12px;fill:#222}</style>
+          <line x1="40" y1="200" x2="560" y2="200" class="axis"/>
+          <line x1="40" y1="20" x2="40" y2="200" class="axis"/>
+          <rect x="80" y="100" width="60" height="100" class="bar"/>
+          <text x="110" y="95" class="label">Revenue</text>
+          <rect x="170" y="120" width="60" height="80" class="bar"/>
+          <text x="200" y="115" class="label">EBITDA</text>
+          <rect x="260" y="140" width="60" height="60" class="bar"/>
+          <text x="290" y="135" class="label">Net</text>
+          <rect x="350" y="70" width="60" height="130" class="bar"/>
+          <text x="380" y="65" class="label">Customers</text>
+        </svg>
+        <aside class="notes">Walk through the KPI numbers...</aside>
+      </section>
+
+      <!-- Code sample -->
+      <section class="dots-bg">
+        <h2>Example: Financial Metrics Calculation</h2>
+        <p>Python snippet to compute revenue growth and CAGR.</p>
+        <pre><code class="language-python"># revenue_growth.py
+old = 1_130_000_000
+new = 1_200_000_000
+growth = (new - old) / old
+print(f"Revenue growth: {growth:.2%}")
+
+# CAGR example
+def cagr(begin, end, years):
+    return (end / begin) ** (1 / years) - 1
+
+print(f"CAGR (3y): {cagr(850e6, 1.2e9, 3):.2%}")</code></pre>
+        <aside class="notes">Explain quickly...</aside>
+      </section>
+
+      <!-- Math slide -->
+      <section class="gradient-bg">
+        <h2>Financial Formula</h2>
+        <p>Present Value of Free Cash Flow (discounted cash flow)</p>
+        <p class="fragment">\[\text{PV} = \sum_{t=1}^{N} \dfrac{FCF_t}{(1+r)^t} + \dfrac{TV}{(1+r)^N}\]</p>
+        <p class="fragment">where \(TV = \dfrac{FCF_{N+1}}{r-g}\)</p>
+        <aside class="notes">Use this slide to explain the DCF...</aside>
+      </section>
+
+      <!-- Nested slides -->
+      <section>
+        <section class="stripe-bg">
+          <h3>Risk & Mitigations</h3>
+          <ul>
+            <li class="fragment">Market volatility — hedging program</li>
+            <li class="fragment">Regulatory changes — compliance budget</li>
+            <li class="fragment">Operational — monitoring & automation</li>
+          </ul>
+          <aside class="notes">Discuss each mitigation...</aside>
+        </section>
+        <section class="wave-bg">
+          <h3>Outlook</h3>
+          <ol>
+            <li class="fragment">H2 focus on product expansion</li>
+            <li class="fragment">Targeted cost savings of 1-2%</li>
+            <li class="fragment">Investments in AI-driven risk models</li>
+          </ol>
+          <aside class="notes">Provide high-level roadmap...</aside>
+        </section>
+      </section>
+
+      <!-- Contact slide (keep star effect) -->
+      <section class="star-bg">
+        <h2 style="color:white">Contact & Where to find this presentation</h2>
+        <p style="color:white">Email: <a style="color:#ffd" href="mailto:23f2002842@ds.study.iitm.ac.in">23f2002842@ds.study.iitm.ac.in</a></p>
+        <svg viewBox="0 0 200 100" class="svg-chart"><rect width="200" height="100" rx="8" fill="#f3f5f7"></rect><circle cx="30" cy="30" r="18" fill="#0b3954"></circle><rect x="60" y="18" width="120" height="14" rx="3" fill="#fff"></rect><rect x="60" y="40" width="80" height="14" rx="3" fill="#fff"></rect></svg>
+        <p class="small-note" style="color:white">Published on GitHub Pages.</p>
+        <aside class="notes">Give repo link during Q&A...</aside>
+      </section>
+
+      <!-- Appendix -->
+      <section class="dots-bg">
+        <h3>Appendix</h3>
+        <p>Selected figures, definitions, and assumptions.</p>
+        <pre><code class="language-javascript">const raw = [1130000000,1200000000,1250000000];
+const pctChange = (a,b)=>(b-a)/a;
+console.log(pctChange(raw[0],raw[1]));</code></pre>
+        <aside class="notes">This slide is for technical reviewers...</aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal core and plugins -->
+  <script src="https://unpkg.com/reveal.js@^4/dist/reveal.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4/plugin/markdown/markdown.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4/plugin/highlight/highlight.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4/plugin/math/math.js"></script>
+
+  <script>
+    Reveal.initialize({
+      hash: true,
+      controls: true,
+      progress: true,
+      slideNumber: true,
+      history: true,
+      plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath ],
+      transition: 'fade'
+    });
+  </script>
+</body>
 </html>
